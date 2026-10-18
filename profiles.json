@@ -1,0 +1,4 @@
+{
+  "demo-gold": {"asset_roles": ["border", "texture"], "status": "example", "geometry": "Fixed round disk; replace central decoration only"},
+  "demo-silver": {"asset_roles": ["border", "texture"], "status": "example", "geometry": "Fixed round disk; replace central decoration only"}
+}

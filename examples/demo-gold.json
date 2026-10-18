@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "demo-gold",
+  "output_name": "Demo Gold",
+  "template": "../assets/demo/template.blend",
+  "source": {
+    "note": "Original synthetic demo; not extracted from Figma"
+  },
+  "layers": [
+    {
+      "target": "Decoration",
+      "svg": "../assets/demo/decoration.svg",
+      "material": "Metal",
+      "thickness_m": 0.0008,
+      "resolution": 12,
+      "fit": "template_bounds"
+    }
+  ],
+  "textures": [
+    {
+      "material": "Classic Mix",
+      "image": "../assets/demo/texture.png"
+    }
+  ],
+  "materials": [
+    {
+      "name": "Metal",
+      "base_color": [
+        0.88,
+        0.78,
+        0.6,
+        1
+      ],
+      "metallic": 1,
+      "roughness": 0.16
+    }
+  ],
+  "finishing": {
+    "bevels": [
+      {
+        "target": "Decoration",
+        "width_m": 0.00012,
+        "segments": 8
+      }
+    ]
+  },
+  "export": {
+    "formats": [
+      "glb",
+      "usdz"
+    ],
+    "usdz_lights": false,
+    "usdz_world": false
+  }
+}

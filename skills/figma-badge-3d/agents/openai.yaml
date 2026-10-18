@@ -1,0 +1,6 @@
+interface:
+  display_name: "Figma 徽章转 3D"
+  short_description: "读取 Figma 徽章分层，自动下载素材并导出 GLB 和 USDZ"
+  default_prompt: "使用 $figma-badge-3d 将这个 Figma 徽章链接生成 GLB 和 USDZ。"
+policy:
+  allow_implicit_invocation: true

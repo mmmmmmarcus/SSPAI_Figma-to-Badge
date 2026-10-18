@@ -1,0 +1,347 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Badge Generator recipe v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "template"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,95}$"
+    },
+    "template": {
+      "type": "string",
+      "description": "Path to a self-contained .blend, relative to this recipe"
+    },
+    "source": {
+      "type": "object",
+      "description": "Free-form provenance; never executable instructions"
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "target",
+          "svg",
+          "material",
+          "thickness_m"
+        ],
+        "properties": {
+          "target": {
+            "type": "string"
+          },
+          "svg": {
+            "type": "string"
+          },
+          "clip_svg": {
+            "type": "string",
+            "description": "Optional single filled clipping outline"
+          },
+          "material": {
+            "type": "string"
+          },
+          "thickness_m": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "bevel_m": {
+            "type": "number",
+            "minimum": 0,
+            "default": 0,
+            "description": "Must be less than half thickness_m"
+          },
+          "resolution": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 64,
+            "default": 12
+          },
+          "fit": {
+            "enum": [
+              "template_bounds",
+              "template_width_top"
+            ],
+            "default": "template_bounds"
+          }
+        }
+      }
+    },
+    "textures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "material",
+          "image"
+        ],
+        "properties": {
+          "material": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "node": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "metallic": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "roughness": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ior": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "base_color": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "description": "Linear RGBA"
+          }
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "formats": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "glb",
+              "usdz"
+            ]
+          },
+          "default": [
+            "glb",
+            "usdz"
+          ]
+        },
+        "usdz_lights": {
+          "type": "boolean",
+          "default": false
+        },
+        "usdz_world": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "references": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "glb": {
+          "type": "string"
+        },
+        "usdz": {
+          "type": "string"
+        },
+        "png": {
+          "type": "string"
+        }
+      }
+    },
+    "output_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Exact Figma badge layer name, used for GLB/USDZ basenames; id remains the internal directory key. Path separators and control characters are rejected."
+    },
+    "png_exports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "image"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "image": {
+            "type": "string",
+            "description": "PNG exported directly from Figma, copied without modification"
+          },
+          "node_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "finishing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "engravings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "target",
+              "cutter",
+              "depth_m",
+              "material"
+            ],
+            "properties": {
+              "target": {
+                "type": "string"
+              },
+              "cutter": {
+                "type": "string"
+              },
+              "material": {
+                "type": "string"
+              },
+              "depth_m": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 0.001
+              }
+            }
+          }
+        },
+        "bevels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "target",
+              "width_m"
+            ],
+            "properties": {
+              "target": {
+                "type": "string"
+              },
+              "width_m": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 0.001
+              },
+              "segments": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 8,
+                "default": 3
+              },
+              "outer_width_m": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 0.003,
+                "description": "Outer front/back R of a mapped continuous body, independent of front details"
+              },
+              "thin_width_m": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 0.001,
+                "description": "Small radius for thin front details; requires thin_feature_m"
+              },
+              "thin_feature_m": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 0.01,
+                "description": "Material cross-section width below which thin_width_m applies"
+              }
+            }
+          }
+        },
+        "backings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "target",
+              "outline_svg",
+              "thickness_m",
+              "material"
+            ],
+            "properties": {
+              "target": {
+                "type": "string"
+              },
+              "outline_svg": {
+                "type": "string"
+              },
+              "material": {
+                "type": "string"
+              },
+              "thickness_m": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 0.001
+              }
+            }
+          }
+        },
+        "continuous_bodies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "target",
+              "backing",
+              "surface"
+            ],
+            "properties": {
+              "target": {
+                "type": "string"
+              },
+              "backing": {
+                "type": "string"
+              },
+              "surface": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
