@@ -1,4 +1,4 @@
-# Figma Badge 3D
+# SSPAI_Figma to Badge
 
 把 Figma 徽章转换成 GLB / USDZ 的 **Codex Skill + 无界面生成程序**。Blender 在后台建模和导出，不需要打开 Blender 界面。支持浅香槟金、银色材质、SVG 浮雕、贴图和可配置圆角。
 
@@ -9,8 +9,8 @@
 依赖：Python **3.10+**、Git、安装在本机的 **Blender 5.1.x**（实测版本见 [验证记录](docs/verification.md)）。Blender 自带 `bpy`、USD 和 SVG 导入器，不要向系统 Python 安装 `bpy`。Pillow 由安装脚本安装，用于验证输入图片。首次安装需要网络，之后素材与模板齐全即可离线导出。
 
 ```sh
-git clone https://github.com/mmmmmmarcus/figma-badge-3d.git
-cd figma-badge-3d
+git clone https://github.com/mmmmmmarcus/SSPAI_Figma-to-Badge.git
+cd SSPAI_Figma-to-Badge
 python3 scripts/setup.py
 .venv/bin/python -m badgegen batch examples/demo-gold.json examples/demo-silver.json --output output
 ```

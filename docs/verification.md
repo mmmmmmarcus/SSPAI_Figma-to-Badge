@@ -9,7 +9,7 @@ Public baseline 0.3.0, 2026-10-18:
 - `pip check` and Codex Skill structure validation passed.
 - A fresh HTTPS clone from the public GitHub repository repeated setup, both demo exports, and all eight tests without private templates or the original virtualenv.
 - A temporary Skill installation resolved the public generator/profile registry correctly. The existing private installation retained its original generator location and passed its five applicable workflow tests (one optional Blender test skipped).
-- GitHub Actions passed on Python 3.10 and 3.13: [initial CI run](https://github.com/mmmmmmarcus/figma-badge-3d/actions/runs/39124023235).
+- GitHub Actions passed on Python 3.10 and 3.13: [initial CI run](https://github.com/mmmmmmarcus/SSPAI_Figma-to-Badge/actions/runs/39124023235).
 
 The demo checks its fine decoration cap normals; it does not exercise private production continuous-body, engraving or exterior R-surface mappings. No native Apple viewer or physical AR-device acceptance is claimed for these new public demos. Windows/Linux Blender exports and live Figma MCP extraction were not revalidated during packaging. The workflow tests use synthetic metadata and PNG fixtures, explicitly not real Figma extraction.
 
